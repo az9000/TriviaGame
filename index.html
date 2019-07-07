@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trivia</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="manifest" href="assets/images/site.webmanifest">
+    
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
+
+    <!-- local -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    
+
+</head>
+<body>
+    
+    <div class="container">
+        <h1>JavaScript Trivia Game!</h1>
+        <div class="item-start">Start</div>
+
+        <!-- time remaining -->
+        <div class="item-time"><span id="time-remaining"></span></div>
+        <!-- Question -->
+        <div class="item-question"><span id="question"></span></div>
+        <!-- answers -->
+        <div class="item-answer">
+            <span id="answer1"></span>
+            <span id="answer2"></span>
+            <span id="answer3"></span>
+            <span id="answer4"></span>
+        </div>
+        <div class="item-restart">
+            Start Over?
+        </div>
+        </div>
+    </div>
+    
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    
+    <!-- game -->
+    <script src="assets/javascript/data.js" ></script>
+    <script src="assets/javascript/app.js" ></script>
+</body>
+</html>
