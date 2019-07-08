@@ -20,10 +20,8 @@ $(document).ready(function() {
         $('.item-time').show();
         $('.item-question').show();
         $('.item-answer').show();
-        // enable pointer
-        $('#item-answer').removeClass('disabled');
         timeRemaining = maxTimeAllowed;
-        $('#time-remaining').css('color' + 'black');
+        setCss('#time-remaining', 'color' , 'black');
         var msg = 'Time Remaining: ' + Math.floor(timeRemaining/10) + timeRemaining%10 + ' seconds';
         $('#time-remaining').html(msg);
         startTheGame();
@@ -71,18 +69,18 @@ $(document).ready(function() {
                 skipped++;
 
                 var id = '#' + chosen;
-                $(id).css('background-color', 'white');
+                setCss(id, 'background-color', 'white');
 
                 // show the correct answer and move on
                 id = '#' + quiz[currentQuestionIndex].answer;
-                $(id).css('background-color', 'green');
+                setCss(id, 'background-color', 'green');
                 locked = true;
 
                 setTimeout(function() {
                     locked = false;
 
                     var id = '#' + quiz[currentQuestionIndex].answer;
-                    $(id).css('background-color', 'white');
+                    setCss(id, 'background-color', 'white');
 
                     timeRemaining = maxTimeAllowed;
 
@@ -100,7 +98,7 @@ $(document).ready(function() {
             }
             // change colors
             if (timeRemaining <= 5) {
-                $('#time-remaining').css('color' , 'red');
+                setCss('#time-remaining', 'color' , 'red');
             }
             
         }, 1000);
@@ -123,7 +121,9 @@ $(document).ready(function() {
         var id;
         for (var i=1; i<=4; i++) {
             id = '#answer' + i; 
-            $(id).css({'border': '1px solid black'});    
+            // show a box
+            setCss(id, 'border', '1px solid black');
+            // show an answer
             if (quiz[index].answers[i-1].length !== 0) {
                 $(id).show();
                 $(id).text(quiz[index].answers[i-1]);
@@ -132,9 +132,7 @@ $(document).ready(function() {
             }
         }
 
-        $('#time-remaining').css('color' , 'black');
-        // disable pointer
-        $('#item-answer').removeClass('disabled');
+        setCss('#time-remaining', 'color' , 'black');       
         
         // start timer
         setTimeout(function() {
@@ -153,7 +151,7 @@ $(document).ready(function() {
                 $(this).css({"background-color" : "white", "cursor" : "pointer"});
             } else {
                 $(this).css({"cursor" : "default"});
-            }        
+            }
     });
 
     // click on answer
@@ -177,10 +175,10 @@ $(document).ready(function() {
             locked = true;
 
             var id = '#' + chosen;
-            $(id).css('background-color', 'white');
+            setCss(id, 'background-color', 'white');
             // show the correct answer and move on
             id = '#' + quiz[currentQuestionIndex].answer;
-            $(id).css('background-color', 'green');
+            setCss(id, 'background-color', 'green');
 
         }
         clearInterval(stopWatch);
@@ -188,9 +186,9 @@ $(document).ready(function() {
             locked = false;
 
             var id = '#' + quiz[currentQuestionIndex].answer;
-            $(id).css('background-color', 'white');
+            setCss(id, 'background-color', 'white');
             id = '#' + chosen;
-            $(id).css('background-color', 'white');
+            setCss(id, 'background-color', 'white');
         // max number of questions reached
             if (list.length === maxQuestions) {
                 gameOver();
@@ -214,7 +212,7 @@ $(document).ready(function() {
 
         clearInterval(stopWatch);
 
-        $('#time-remaining').css('color' , 'black');
+        setCss('#time-remaining', 'color' , 'black');
         var msg = 'Game Over!';
         $('#time-remaining').html(msg);
 
@@ -222,26 +220,23 @@ $(document).ready(function() {
         
         // display results
         $('.item-question').text('Your results:');
-        $('#answer1').css('border', '0px');
-        $('#answer2').css('border', '0px');
-        $('#answer3').css('border', '0px');
-        $('#answer4').css('border', '0px');
+        setCss('.correct, .wrong, .skipped, .avg-time', 'border', '0px');
         
-        $('#answer1').show();
-        $('#answer1').text('Correct Answers: ' + correctAnswers);
-
-        $('#answer2').show();
+        $('.correct').show();
+        $('.correct').text('Correct Answers: ' + correctAnswers);
+        
+        $('.wrong').show();
         var wrong = maxQuestions - (skipped + correctAnswers);
-        $('#answer2').text('Wrong Answers: ' + wrong);
+        $('.wrong').text('  Wrong Answers: ' + wrong);
 
-        $('#answer3').show();
-        $('#answer3').text('Skipped: ' + skipped);
+        $('.skipped').show();
+        $('.skipped').text('Skipped Answers: ' + skipped);
 
-        $('#answer4').show();
+        $('.avg-time').show();
         console.log(averageTimes);
         var total = averageTimes.reduce((previous, current) => current += previous);
         var average = total / averageTimes.length;
-        $('#answer4').text('Average Time: ' + Math.floor(average) + ' seconds');
+        $('.avg-time').text('Average Time: ' + Math.floor(average) + ' seconds');
 
 
         $('.item-restart').show();
@@ -253,11 +248,16 @@ $(document).ready(function() {
         $('.item-question').show();
         $('.item-answer').show();
         timeRemaining = maxTimeAllowed;
-        $('#time-remaining').css('color' + 'black');
+        setCss('#time-remaining', 'color' + 'black');
         var msg = 'Time Remaining: ' + Math.floor(timeRemaining/10) + timeRemaining%10 + ' seconds';
         $('#time-remaining').html(msg);
         startTheGame();
     });
+
+
+    function setCss(id, key, value) {
+        $(id).css(key, value);
+    }
 
     function found(value) {
         for (var i=0; i<list.length; i++) {
