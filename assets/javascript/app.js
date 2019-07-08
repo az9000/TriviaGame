@@ -11,6 +11,7 @@ $(document).ready(function() {
     const maxTimeAllowed = 10;
     const maxQuestions = 10;
     var chosen;
+    var isGameOver = true;
 
     // click start
     $('.item-start').on('click', function() {
@@ -19,6 +20,8 @@ $(document).ready(function() {
         $('.item-time').show();
         $('.item-question').show();
         $('.item-answer').show();
+        // enable pointer
+        $('#item-answer').removeClass('disabled');
         timeRemaining = maxTimeAllowed;
         $('#time-remaining').css('color' + 'black');
         var msg = 'Time Remaining: ' + Math.floor(timeRemaining/10) + timeRemaining%10 + ' seconds';
@@ -27,6 +30,8 @@ $(document).ready(function() {
     });
 
     function startTheGame() {
+
+        isGameOver = false;
 
         $('.item-restart').hide();
 
@@ -128,6 +133,8 @@ $(document).ready(function() {
         }
 
         $('#time-remaining').css('color' , 'black');
+        // disable pointer
+        $('#item-answer').removeClass('disabled');
         
         // start timer
         setTimeout(function() {
@@ -136,12 +143,16 @@ $(document).ready(function() {
     }
 
     $('#answer1, #answer2, #answer3, #answer4').hover(function(){
-            if (!locked) {
-                $(this).css("background-color", "lightblue");
+            if (!locked && !isGameOver) {
+                $(this).css({"background-color" : "lightblue", "cursor" : "pointer"});
+            } else {
+                $(this).css({"cursor" : "default"});
             }
         }, function(){
             if (!locked) {
-                $(this).css("background-color", "white");
+                $(this).css({"background-color" : "white", "cursor" : "pointer"});
+            } else {
+                $(this).css({"cursor" : "default"});
             }        
     });
 
@@ -170,6 +181,7 @@ $(document).ready(function() {
             // show the correct answer and move on
             id = '#' + quiz[currentQuestionIndex].answer;
             $(id).css('background-color', 'green');
+
         }
         clearInterval(stopWatch);
         setTimeout(function() {
@@ -198,6 +210,8 @@ $(document).ready(function() {
 
     function gameOver() {
 
+        isGameOver = true;
+
         clearInterval(stopWatch);
 
         $('#time-remaining').css('color' , 'black');
@@ -205,6 +219,7 @@ $(document).ready(function() {
         $('#time-remaining').html(msg);
 
         // finished
+        
         // display results
         $('.item-question').text('Your results:');
         $('#answer1').css('border', '0px');
@@ -212,7 +227,6 @@ $(document).ready(function() {
         $('#answer3').css('border', '0px');
         $('#answer4').css('border', '0px');
         
-
         $('#answer1').show();
         $('#answer1').text('Correct Answers: ' + correctAnswers);
 

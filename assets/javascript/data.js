@@ -1,4 +1,4 @@
-var quiz = [
+const quiz = [
     {
         question: 'What are JavaScript Data Types?',
         answers: [
