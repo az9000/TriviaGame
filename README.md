@@ -1,4 +1,4 @@
-# JanaScript TriviaGame
+# JanaScript Trivia Game
 This is a JavaScript quiz that aims oi test the user on their knowledge of basic JavaScript concepts.
 The quiz has 10 questions. The User has 10 seconds to answer each question.
 The questions are random chosen from a set of 30 different questions.
