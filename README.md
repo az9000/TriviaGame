@@ -3,6 +3,9 @@ This is a JavaScript quiz that aims oi test the user on their knowledge of basic
 The quiz has 10 questions. The User has 10 seconds to answer each question.
 The questions are random chosen from a set of 30 different questions.
 
+# Demo
+https://az9000.github.io/TriviaGame/
+
 # Prerequisites
 - JavaScript knowledge
 - Internet connectivity
